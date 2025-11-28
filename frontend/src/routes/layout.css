@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  --color-text: #131313;
+  --color-link: #131313;
+  --color-footnote: #636363;
+  --color-background: #f1f1f1;
+  --color-inner: #ececec;
+  --color-inner-border: #e1e1e1;
+}
+
+@layer base {
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  .timing-card {
+    transition: border-color 0.3s ease, padding 0.3s ease,
+      background-color 0.3s ease, border-radius 0.3s ease;
+  }
+
+  .timing-card > img {
+    transition: border-radius 0.3s ease;
+  }
+
+  .timing-card > div#card-info {
+    transition: margin 0.3s ease;
+  }
+
+ .masonry {
+    column-count: 3;
+    column-gap: 1.5rem;
+  }
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+  @media (max-width: 1024px) {
+    .masonry {
+      column-count: 2;
+    }
+  }
+  @media (max-width: 640px) {
+    .masonry {
+      column-count: 1;
+    }
+  }
+
+
+  .flip-card {
+    width: 20px;
+    height: 20px;
+    perspective: 1000px; /* depth */
+  }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .flip-card.loaded .flip-card-inner {
+    transform: rotateX(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  /* front */
+  .flip-card-front {
+    background: var(--color-inner-border);
+  }
+
+  /* back */
+  .flip-card-back {
+    background: var(--color-black);
+    transform: rotateY(180deg);
+  }
+
+  .experience-highlights > ul {
+    @apply list-disc list-outside pl-5 mb-4;
+  }
+
+  .experience-highlights > ul > li {
+    @apply mb-2;
+  }
+
+  .experience-highlights > p {
+    @apply mb-4;
+  }
+
+  .experience-highlights > h1 {
+    @apply text-3xl font-bold mb-4;
+  }
+
+  .experience-highlights > h2  {
+    @apply text-2xl font-semibold mb-3;
+  }
+
+  .experience-highlights > h3 {
+    @apply text-xl font-semibold mb-2;
+  }
+
+
+  /* remove image blur */
+  img {
+    image-rendering: crisp-edges;
+  }
+}
