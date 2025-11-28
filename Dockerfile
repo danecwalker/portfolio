@@ -20,6 +20,11 @@ WORKDIR /app
 
 # Copy the binary from builder stage
 COPY --from=builder /app/main .
+# Copy CA certificates from builder (Alpine) stage
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+
+# Set SSL_CERT_FILE environment variable (optional, but helps Go apps find the CA bundle)
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 # Run the application
 CMD ["./main"]
