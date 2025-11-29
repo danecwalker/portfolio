@@ -77,42 +77,55 @@
         </div>
       </div>
     {:else}
-      <div class="flex flex-col w-1/2">
+      <div class="lg:flex lg:flex-col lg:w-1/2 w-full gap-8 grid grid-cols-1">
         {#each experiences as experience, i}
           <!-- svelte-ignore a11y_no_static_element_interactions -->
-          <div
-            data-selected={hoveredCard === i}
-            onmouseenter={() => (hoveredCard = i)}
-            class="flex gap-4 items-center data-[selected=true]:bg-inner bg-transparent p-4 timing-card rounded-lg"
-          >
-            <div class="w-12 aspect-square rounded-lg overflow-hidden">
-              {#if !experience.logoURL}
-                <div
-                  class="w-full h-full bg-inner flex items-center justify-center text-footnote text-sm"
-                >
-                  <CompanyIcon />
-                </div>
-              {:else}
-                <img
-                  src={experience.logoURL}
-                  alt={experience.company}
-                  class="w-full h-full object-contain"
-                />
-              {/if}
+          <div>
+            <div
+              data-selected={hoveredCard === i}
+              onmouseenter={() => (hoveredCard = i)}
+              class="flex gap-4 items-center lg:data-[selected=true]:bg-inner bg-transparent py-4 lg:px-4 px-0 lg:timing-card rounded-lg flex-row-reverse lg:flex-row justify-between lg:justify-start cursor-pointer"
+            >
+              <div class="w-12 aspect-square rounded-lg overflow-hidden">
+                {#if !experience.logoURL}
+                  <div
+                    class="w-full h-full bg-inner flex items-center justify-center text-footnote text-sm"
+                  >
+                    <CompanyIcon />
+                  </div>
+                {:else}
+                  <img
+                    src={experience.logoURL}
+                    alt={experience.company}
+                    class="w-full h-full object-contain"
+                  />
+                {/if}
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg">
+                  {experience.position}
+                  <span class="hidden lg:block">@ {experience.company}</span>
+                </h3>
+                <p class="text-sm text-footnote">
+                  {experience.start} - {experience.end ?? "Present"}
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 class="font-semibold text-lg">
-                {experience.position} @ {experience.company}
-              </h3>
-              <p class="text-sm text-footnote">
-                {experience.start} - {experience.end ?? "Present"}
-              </p>
+
+            <div class="lg:hidden block">
+              <h3 class="font-semibold">{experience.company}</h3>
+
+              <div class="experience-highlights mt-4">
+                {#if experience.hightlights}
+                  {@html experience.hightlights}
+                {/if}
+              </div>
             </div>
           </div>
         {/each}
       </div>
 
-      <div class="relative w-1/2 flex-1 h-[440px]">
+      <div class="relative w-1/2 flex-1 h-[440px] hidden lg:block">
         {#key hoveredCard}
           <div
             in:scale={{ start: 0.9, duration: 500 }}

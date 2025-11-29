@@ -100,7 +100,7 @@
 
 <section
   id="projects"
-  class="w-full max-w-7xl min-h-[600px] mx-auto p-8 text-text"
+  class="w-full max-w-7xl min-h-[760px] mx-auto p-8 text-text"
 >
   <div class="w-full flex items-start">
     <span class="text-sm mr-2 text-footnote">[1]</span>
@@ -122,16 +122,21 @@
         </div>
       </div>
     {:else}
-      <div class="flex flex-col w-1/3">
+      <div class="lg:flex lg:flex-col lg:w-1/3 w-full gap-8 lg:gap-0 grid grid-cols-1 md:grid-cols-2">
         {#each projects as project, i}
           <!-- svelte-ignore a11y_no_static_element_interactions -->
-          <a href="{project.projectURL}" target="_blank" rel="noopener noreferrer">
+          <a href="{project.projectURL}" target="_blank" rel="noopener noreferrer" data-umami-event="project-link-click" data-umami-event-url={project.projectURL}>
+            <img 
+              src={project.projectImageURL}
+              alt={project.title}
+              class="w-full aspect-5/4 object-cover rounded-lg block lg:hidden"
+            >
             <div
               onmouseenter={() => (hoveredCard = i)}
               onmousemove={handleMouseMove}
               onmouseleave={handleMouseLeave}
               data-selected={hoveredCard === i}
-              class="data-[selected=true]:bg-inner bg-transparent p-4 timing-card rounded-lg"
+              class="lg:data-[selected=true]:bg-inner bg-transparent py-4 px-0 lg:px-4 lg:timing-card rounded-lg"
             >
               <div id="card-info">
                 <h3 class="font-semibold text-lg">{project.title}</h3>
@@ -142,7 +147,7 @@
         {/each}
       </div>
 
-      <div class="relative w-2/3 flex-1">
+      <div class="relative w-2/3 flex-1 hidden lg:block">
         {#key hoveredCard}
           <img
             in:fade={{ duration: 300 }}

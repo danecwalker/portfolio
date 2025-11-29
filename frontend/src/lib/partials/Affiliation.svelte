@@ -74,13 +74,13 @@
           </div>
         </div>
       {:else}
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid lg:grid-cols-6 sm:grid-cols-4 grid-cols-2 gap-4">
           {#each affiliations as affiliation}
             <div
-              class="group w-full aspect-square hover:p-4 p-0 overflow-hidden duration-200 rounded-xl bg-inner"
+              class="group w-full aspect-square sm:hover:p-4 p-0 overflow-hidden duration-200 rounded-xl bg-inner"
             >
               <div
-                class="w-full aspect-square group-hover:aspect-6/5 duration-200 rounded-none group-hover:rounded-lg flex items-center justify-center text-footnote text-sm overflow-hidden"
+                class="w-full aspect-square sm:group-hover:aspect-6/5 sm:duration-200 rounded-none sm:group-hover:rounded-lg flex items-center justify-center text-footnote text-sm overflow-hidden"
               >
                 <img
                   src={affiliation.logoURL}
